@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile | Expense Tracker Pro</title>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    /* === Page Theme === */
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #74b9ff, #a29bfe, #81ecec);
+      background-attachment: fixed;
+      color: #fff;
+    }
+
+    /* === Navbar === */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 15px 30px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    nav h2 {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .nav-links a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: 0.3s;
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* === Main Container === */
+    main.glass {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      width: 90%;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    h2 {
+      font-size: 26px;
+      margin-bottom: 30px;
+      color: #f1f2f6;
+    }
+
+    /* === Profile Card === */
+    .profile-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      transition: 0.3s;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.5);
+      margin-bottom: 15px;
+      transition: 0.3s;
+    }
+
+    .avatar:hover {
+      transform: scale(1.05);
+      border-color: #00cec9;
+    }
+
+    .profile-card h3 {
+      margin: 10px 0;
+      color: #fff;
+      font-size: 22px;
+    }
+
+    .profile-card p {
+      margin: 5px 0;
+      color: #dfe6e9;
+      font-size: 15px;
+    }
+
+    /* === Buttons === */
+    button {
+      background: linear-gradient(135deg, #6c5ce7, #0984e3);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      padding: 10px 18px;
+      margin-top: 15px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(135deg, #00cec9, #6c5ce7);
+    }
+
+    /* === Edit Form === */
+    #editProfileForm {
+      margin-top: 25px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    #editProfileForm input {
+      padding: 10px;
+      width: 80%;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      text-align: center;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    #editProfileForm input:focus {
+      background: rgba(255, 255, 255, 0.35);
+      transform: scale(1.03);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #fff;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <h2>💰 Expense Tracker Pro</h2>
+    <div class="nav-links">
+      <a href="index.html">🏠 Dashboard</a>
+      <a href="add-expense.html">➕ Add Expense</a>
+      <a href="analytics.html">📊 Analytics</a>
+      <a href="chatbot.html">🤖 Chatbot</a>
+      <a href="profile.html" class="active">👤 Profile</a>
+      <button onclick="toggleTheme()">🌙</button>
+    </div>
+  </nav>
+
+  <main class="glass profile-page">
+    <h2>👋 My Profile</h2>
+    <div class="profile-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User Avatar" class="avatar">
+      <h3 id="username">Nikhil Arora</h3>
+      <p>Email: <span id="userEmail">nikhil@example.com</span></p>
+      <p>Joined: <span id="joinDate">January 2025</span></p>
+      <button id="editProfileBtn">✏️ Edit Profile</button>
+    </div>
+
+    <div id="editProfileForm">
+      <input type="text" id="editName" placeholder="Enter new name">
+      <input type="email" id="editEmail" placeholder="Enter new email">
+      <button id="saveProfileBtn">💾 Save Changes</button>
+    </div>
+  </main>
+
+  <footer>💡 Manage your money, master your future!</footer>
+
+  <script src="./script.js"></script>
+  <script>
+    const editBtn = document.getElementById("editProfileBtn");
+    const saveBtn = document.getElementById("saveProfileBtn");
+    const form = document.getElementById("editProfileForm");
+
+    editBtn.addEventListener("click", () => {
+      form.style.display = form.style.display === "flex" ? "none" : "flex";
+    });
+
+    saveBtn.addEventListener("click", () => {
+      const newName = document.getElementById("editName").value.trim();
+      const newEmail = document.getElementById("editEmail").value.trim();
+
+      if (!newName || !newEmail) {
+        alert("⚠️ Please fill out both fields!");
+        return;
+      }
+
+      localStorage.setItem("userName", newName);
+      localStorage.setItem("userEmail", newEmail);
+
+      document.getElementById("username").textContent = newName;
+      document.getElementById("userEmail").textContent = newEmail;
+
+      alert("✅ Profile updated successfully!");
+      form.style.display = "none";
+    });
+
+    window.onload = () => {
+      const name = localStorage.getItem("userName");
+      const email = localStorage.getItem("userEmail");
+      if (name) document.getElementById("username").textContent = name;
+      if (email) document.getElementById("userEmail").textContent = email;
+    };
+  </script>
+</body>
+</html>
